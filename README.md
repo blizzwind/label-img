@@ -19,6 +19,8 @@ A Krita plugin for image labeling.
    **Settings > Configure Krita > Keyboard Shortcuts > Scripts > Label IMG > (Go Left & Go Right)**
 5. Disable Acceleration (This setting sometimes crashed Krita):<br>
    **Settings > Configure Krita > Display > Canvas Acceleration > Canvas Graphics Acceleration**
+6. Disable autosaving & backup (This setting affects file reading):<br>
+   **Settings > General > File Handling > (Enable Autosaving & Create a Backup File on Saving)**
 
 ### usage
 1. Open a random image.
