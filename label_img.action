@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActionCollection version="2" name="Scripts">
+    <Actions category="Scripts">
+        <text>Label IMG</text>
+		
+        <Action name="go_right">
+        <icon></icon>
+        <text>Go Right</text>
+        <whatsThis></whatsThis>
+        <toolTip></toolTip>
+        <iconText></iconText>
+        <activationFlags>10000</activationFlags>
+        <activationConditions>0</activationConditions>
+        <shortcut></shortcut>
+        <isCheckable>false</isCheckable>
+        <statusTip></statusTip>
+        </Action>
+		
+		<Action name="go_left">
+        <icon></icon>
+        <text>Go Left</text>
+        <whatsThis></whatsThis>
+        <toolTip></toolTip>
+        <iconText></iconText>
+        <activationFlags>10000</activationFlags>
+        <activationConditions>0</activationConditions>
+        <shortcut></shortcut>
+        <isCheckable>false</isCheckable>
+        <statusTip></statusTip>
+        </Action>
+    </Actions>
+</ActionCollection>
