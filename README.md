@@ -25,11 +25,14 @@ A Krita plugin for image labeling.
 ### usage
 1. Open a random image.
 1. Copy and paste the image folder directory to docker.<br>
+   Usually JPG format.<br>
    **eg. D:/path/to/image/folder**
 2. Copy and paste the label folder directory to docker.<br>
    This directory should have blank images when initiated.<br>
-   Images should also have 3 bands.<br>
+   Labels should also have 3 bands. Usually PNG format.<br>
    **eg. D:/path/to/label/folder**
+3. Press the "SETUP" button to start labeling.
+4. Press the ">>>" or "<<<" button to go to the next or previous image & label pair.
 
 ### notice
 1. Test on Krita 5.1 & Krita 5.2.
