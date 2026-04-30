@@ -3,6 +3,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit
 import glob
+import gc
 
 class LabelIMGExt(Extension):
     def __init__(self,parent):
@@ -21,9 +22,12 @@ class LabelIMGExt(Extension):
     
     def dogoLeft(self):
         global idx
-        Krita.instance().activeDocument().setBatchmode(True)
-        Krita.instance().activeDocument().saveAs(label_list[idx])
-        Krita.instance().activeDocument().close()
+        active_doc = Krita.instance().activeDocument()
+        active_doc.setBatchmode(True)
+        active_doc.saveAs(label_list[idx])
+        active_doc.close()
+        del active_doc
+        gc.collect()
         if idx > 0:
             idx -= 1
         imgDocument = Krita.instance().openDocument(img_list[idx])
@@ -36,6 +40,10 @@ class LabelIMGExt(Extension):
         height = labelDocument.height()
         label = labelDocument.pixelData(0,0,width,height)
         new_layer.setPixelData(label,0,0,width,height)
+        labelDocument.close()
+        del label 
+        del labelDocument
+        gc.collect()
         #semi-refresh
         root_node = Krita.instance().activeDocument().rootNode()
         null_layer = Krita.instance().activeDocument().createNode("NULL","paintLayer")
@@ -46,9 +54,12 @@ class LabelIMGExt(Extension):
         
     def dogoRight(self):
         global idx
-        Krita.instance().activeDocument().setBatchmode(True)
-        Krita.instance().activeDocument().saveAs(label_list[idx])
-        Krita.instance().activeDocument().close()
+        active_doc = Krita.instance().activeDocument()
+        active_doc.setBatchmode(True)
+        active_doc.saveAs(label_list[idx])
+        active_doc.close()
+        del active_doc
+        gc.collect()
         if idx < len(img_list)-1:
             idx += 1
         imgDocument = Krita.instance().openDocument(img_list[idx])
@@ -61,6 +72,10 @@ class LabelIMGExt(Extension):
         height = labelDocument.height()
         label = labelDocument.pixelData(0,0,width,height)
         new_layer.setPixelData(label,0,0,width,height)
+        labelDocument.close()
+        del label 
+        del labelDocument
+        gc.collect()
         #semi-refresh
         root_node = Krita.instance().activeDocument().rootNode()
         null_layer = Krita.instance().activeDocument().createNode("NULL","paintLayer")
@@ -88,7 +103,10 @@ def setup():
     idx = 0
     img_list = glob.glob(img_path_inp.text()+"/*")
     label_list = glob.glob(label_path_inp.text()+"/*")
-    Krita.instance().activeDocument().close()
+    try:
+        Krita.instance().activeDocument().close()
+    except:
+        pass
     imgDocument = Krita.instance().openDocument(img_list[0])
     Krita.instance().activeWindow().addView(imgDocument)
     root_node = Krita.instance().activeDocument().rootNode()
@@ -99,6 +117,10 @@ def setup():
     height = labelDocument.height()
     label = labelDocument.pixelData(0,0,width,height)
     new_layer.setPixelData(label,0,0,width,height)
+    labelDocument.close()
+    del label 
+    del labelDocument
+    gc.collect()
     #semi-refresh
     root_node = Krita.instance().activeDocument().rootNode()
     null_layer = Krita.instance().activeDocument().createNode("NULL","paintLayer")
